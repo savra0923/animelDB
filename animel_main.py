@@ -49,7 +49,7 @@ def get_keypoints_json(row):
             "y1": row[7],
             "rate": row[8]
         },
-        "Tail": {
+        "tail": {
             "x1": row[9],
             "y1": row[10],
             "rate": row[11]
@@ -100,7 +100,7 @@ def insert_data(index, df_row):
             'y2': None
         },
         'id': 0,
-        'keypoints': df_row,  # need to get it form dp
+        'keypoints': df_row,
         'rate': None
     })
 
@@ -123,9 +123,9 @@ def create_json(df, json_dict):
     df['keypoints'] = df.apply(get_keypoints_json, axis=1)
 
     for ind, row in df.iterrows():
-        if ind in json_dict:
+        if (int(ind)) in json_dict.keys():
             new_json['frame_annotations'].update({
-                ind: merge_data(row['keypoints'], json_dict[ind])
+                ind: merge_data(row['keypoints'], json_dict[int(ind)])
                 })
         else:
             new_json['frame_annotations'].update({
@@ -148,4 +148,4 @@ if __name__ == '__main__':
     new_json= create_json(aeden_pd, json_dict)
 
     with open('result.json', 'w') as ofile:
-        json.dump(new_json, ofile)
+        json.dump(new_json, ofile, indent=4)
