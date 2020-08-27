@@ -137,9 +137,15 @@ def create_json(df, json_dict):
 # calls all necessary methods and saves the new
 # created json as result.json
 if __name__ == '__main__':
-    aeden_pd=pd.read_csv("Aeden_session_1_trial_1.csv")
 
-    with open('Aeden_session_1_trial_1.json') as jf:
+    # if you work on different files just change df_name and js_name,
+    # for the desired csv and json, respectively
+    df_name= "Aeden_session_1_trial_1.csv"
+    js_name= 'Aeden_session_1_trial_1.json'
+
+    aeden_pd=pd.read_csv(df_name)
+
+    with open(js_name) as jf:
         aeden_json= json.load(jf)
 
     aeden_pd = df_cleanup(aeden_pd)
